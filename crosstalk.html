@@ -1,0 +1,79 @@
+<html>
+<head>
+<style>
+fieldset {
+   width: 330px;
+}
+</style>
+
+<link rel="stylesheet" type="text/css" href="crosstalk.css"/>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="crosstalk.js"></script>
+<script>
+$(document).ready(function() {
+    
+    for (lang in ctx_languages) {
+       var countryCode = ctx_languages[lang][1];
+       $('.lg').append('<option value=' + lang + '>' + lang + '</option>');
+    }
+    $('#fromLang').val('English');
+    $('#fromLang').change();
+    $('#toLang').val('French');
+    $('#toLang').change();
+
+    var fromLang = $('#fromLang').val();
+    var toLang = $('#toLang').val();
+    var translateButton = $('#tbut').val() === 'true';
+
+    $('#crossTalkContainer').crosstalk({'fromLang': fromLang, 'toLang': toLang, 'translateButton' : translateButton});
+
+    $('#fromLang').change(function() {
+        fromLang = $(this).val();
+        $('#crossTalkContainer').crosstalk({'fromLang': fromLang, 'toLang': toLang, 'translateButton' : translateButton});
+    });
+    $('#toLang').change(function() {
+        toLang = $(this).val();
+        $('#crossTalkContainer').crosstalk({'fromLang': fromLang, 'toLang': toLang, 'translateButton' : translateButton});
+    });
+    $('#tbut').change(function() {
+        translateButton = $('#tbut').val() === 'true';
+        $('#crossTalkContainer').crosstalk({'fromLang': fromLang, 'toLang': toLang, 'translateButton' : translateButton});
+    });
+
+    $('#rows').keypress(function(event) {
+        if ( event.which == 13 ) {
+            event.preventDefault();
+            rows = parseInt($(this).val());
+            $('#crossTalkContainer').crosstalk({'fromLang': fromLang, 'toLang': toLang, 'translateButton' : translateButton});
+        }
+    });
+    $('#cols').keypress(function(event) {
+        if ( event.which == 13 ) {
+            event.preventDefault();
+            cols = parseInt($(this).val());
+            $('#crossTalkContainer').crosstalk({'fromLang': fromLang, 'toLang': toLang, 'translateButton' : translateButton});
+        }
+    });
+});
+</script>
+</head>
+
+<body>
+
+<fieldset>
+   <legend>Configuration</legend>
+   <div style="float:left;"><label>fromLang:</label></div><div style="float:right;"><select style="min-width:160px;" class="lg" id="fromLang"></select></div>
+   <div style="clear:both;"/>
+   <div style="float:left;"><label>toLang:</label></div><div style="float:right;"><select style="min-width:160px;" class="lg" id="toLang"></select></div>
+   <div style="clear:both;"/>
+   <div style="float:left;"><label>translateButton:</label></div><div style="float:right;">
+         <select id="tbut" style="min-width:160px;"><option value="false">No</option><option value="true">Yes</option></select>
+   </div>
+</fieldset>
+<br/>
+
+<div id="crossTalkContainer"></div>
+
+</body>
+
+</html>

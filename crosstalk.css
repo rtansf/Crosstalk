@@ -1,0 +1,19 @@
+.xtalk_from_container {
+   float:left;
+}
+
+.xtalk_to_container {
+   float:left;
+}
+
+.xtalk_countryFlag {
+   padding-left: 2px;
+}
+
+.xtalk_translate_button {
+  float:left;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
